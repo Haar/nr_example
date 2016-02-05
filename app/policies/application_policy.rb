@@ -1,4 +1,13 @@
 class ApplicationPolicy < NaturalResource::Policy
+
+  def user?
+    user.is_a? User
+  end
+
+  def admin?
+    user? && user.admin?
+  end
+
   class Scope < Scope
     # It is recommended to use per-role scopes for Users # simply extend the
     # resolve method with conditions for each "role" and the name of the scope

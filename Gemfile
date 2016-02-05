@@ -32,12 +32,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-gem 'natural_resource', '~> 0.1.5'
+gem 'natural_resource', '~> 0.1.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
+  gem 'pry'
 end
 
 group :development do
