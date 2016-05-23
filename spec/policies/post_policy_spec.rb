@@ -10,13 +10,16 @@ describe PostPolicy do
     let(:user) { nil }
 
     it { is_expected.to_not permit_auth :create }
+    it { is_expected.to_not permit_auth :edit }
+    it { is_expected.to_not permit_auth :query }
   end
 
   context 'when a standard user' do
     let(:user) { User.new }
 
-    it { is_expected.to permit_auth :create }
+    it { is_expected.to     permit_auth :create }
     it { is_expected.to_not permit_auth :edit }
+    it { is_expected.to_not permit_auth :query }
 
     context 'when the post author' do
       let(:user) { author }
@@ -28,7 +31,8 @@ describe PostPolicy do
   context 'when an admin user' do
     let(:user) { User.new(admin: true) }
 
-    it { is_expected.to permit_auth(:edit) }
+    it { is_expected.to permit_auth :edit }
+    it { is_expected.to permit_auth :query }
   end
 
   describe PostPolicy::Scope do

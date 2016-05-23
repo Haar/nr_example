@@ -7,6 +7,10 @@ class PostPolicy < ApplicationPolicy
     author? || admin?
   end
 
+  def query?
+    admin?
+  end
+
   def author?
     user? && record.user == user
   end

@@ -1,18 +1,27 @@
-- if current_user.admin?
+- if policy(Post).query?
   %h1 All Posts
 - else
   %h1 My Posts
+
+- if policy(Post).query?
+  = search_form_for query do |f|
+    = f.label 'Author Email', for: :user_email_cont
+    = f.text_field :user_email_cont
+
+    = f.submit 'Search', class: 'btn btn-primary'
+
 - if policy(resource_class).new?
   = link_to 'New Post', new_post_path
+
 %table
   %tr
-    - if current_user.admin?
-      %th Author
+    - if policy(Post).query?
+      %th= sort_link(query, :user_id, 'Author')
     %th Title
     %th Options
   - resources.each do |resource|
     %tr
-      - if current_user.admin?
+      - if policy(Post).query?
         %td= resource.user.email
       %td= resource.title
       %td
